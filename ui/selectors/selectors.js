@@ -12,12 +12,6 @@ import {
   OPTIMISM_TESTNET_CHAIN_ID,
   BUYABLE_CHAINS_MAP,
   MAINNET_DISPLAY_NAME,
-  BSC_CHAIN_ID,
-  POLYGON_CHAIN_ID,
-  AVALANCHE_CHAIN_ID,
-  BSC_DISPLAY_NAME,
-  POLYGON_DISPLAY_NAME,
-  AVALANCHE_DISPLAY_NAME,
   CHAIN_ID_TO_RPC_URL_MAP,
 } from '../../shared/constants/network';
 import {
@@ -1021,12 +1015,6 @@ export const getTokenDetectionSupportNetworkByChainId = (state) => {
   switch (chainId) {
     case MAINNET_CHAIN_ID:
       return MAINNET_DISPLAY_NAME;
-    case BSC_CHAIN_ID:
-      return BSC_DISPLAY_NAME;
-    case POLYGON_CHAIN_ID:
-      return POLYGON_DISPLAY_NAME;
-    case AVALANCHE_CHAIN_ID:
-      return AVALANCHE_DISPLAY_NAME;
     default:
       return '';
   }
@@ -1040,12 +1028,7 @@ export const getTokenDetectionSupportNetworkByChainId = (state) => {
  */
 export function getIsTokenDetectionSupported(state) {
   const chainId = getCurrentChainId(state);
-  return [
-    MAINNET_CHAIN_ID,
-    BSC_CHAIN_ID,
-    POLYGON_CHAIN_ID,
-    AVALANCHE_CHAIN_ID,
-  ].includes(chainId);
+  return [MAINNET_CHAIN_ID].includes(chainId);
 }
 
 /**

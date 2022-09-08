@@ -17,7 +17,6 @@ describe('NetworkController', () => {
       getLatestBlockStub = sinon
         .stub(networkController, 'getLatestBlock')
         .callsFake(() => Promise.resolve({}));
-      networkController.setInfuraProjectId('foo');
       setProviderTypeAndWait = () =>
         new Promise((resolve) => {
           networkController.on(NETWORK_EVENTS.NETWORK_DID_CHANGE, () => {

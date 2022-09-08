@@ -28,10 +28,6 @@ const terser = require('terser');
 const bifyModuleGroups = require('bify-module-groups');
 
 const metamaskrc = require('rc')('metamask', {
-  INFURA_PROJECT_ID: process.env.INFURA_PROJECT_ID,
-  INFURA_BETA_PROJECT_ID: process.env.INFURA_BETA_PROJECT_ID,
-  INFURA_FLASK_PROJECT_ID: process.env.INFURA_FLASK_PROJECT_ID,
-  INFURA_PROD_PROJECT_ID: process.env.INFURA_PROD_PROJECT_ID,
   ONBOARDING_V2: process.env.ONBOARDING_V2,
   COLLECTIBLES_V1: process.env.COLLECTIBLES_V1,
   PHISHING_WARNING_PAGE_URL: process.env.PHISHING_WARNING_PAGE_URL,
@@ -86,31 +82,6 @@ function getConfigValue(key) {
     throw new Error(`Missing config entry for '${key}'`);
   }
   return value;
-}
-
-/**
- * Get the appropriate Infura project ID.
- *
- * @param {object} options - The Infura project ID options.
- * @param {BuildType} options.buildType - The current build type.
- * @param {ENVIRONMENT[keyof ENVIRONMENT]} options.environment - The build environment.
- * @param {boolean} options.testing - Whether the current build is a test build or not.
- * @returns {string} The Infura project ID.
- */
-function getInfuraProjectId({ buildType, environment, testing }) {
-  if (testing) {
-    return '00000000000000000000000000000000';
-  } else if (environment !== ENVIRONMENT.PRODUCTION) {
-    // Skip validation because this is unset on PRs from forks.
-    return metamaskrc.INFURA_PROJECT_ID;
-  } else if (buildType === BuildType.main) {
-    return getConfigValue('INFURA_PROD_PROJECT_ID');
-  } else if (buildType === BuildType.beta) {
-    return getConfigValue('INFURA_BETA_PROJECT_ID');
-  } else if (buildType === BuildType.flask) {
-    return getConfigValue('INFURA_FLASK_PROJECT_ID');
-  }
-  throw new Error(`Invalid build type: '${buildType}'`);
 }
 
 /**
@@ -934,7 +905,6 @@ function getEnvironmentVariables({ buildType, devMode, testing, version }) {
     CONF: devMode ? metamaskrc : {},
     SENTRY_DSN: process.env.SENTRY_DSN,
     SENTRY_DSN_DEV: metamaskrc.SENTRY_DSN_DEV,
-    INFURA_PROJECT_ID: getInfuraProjectId({ buildType, environment, testing }),
     SEGMENT_HOST: metamaskrc.SEGMENT_HOST,
     SEGMENT_WRITE_KEY: getSegmentWriteKey({ buildType, environment }),
     SWAPS_USE_DEV_APIS: process.env.SWAPS_USE_DEV_APIS === '1',

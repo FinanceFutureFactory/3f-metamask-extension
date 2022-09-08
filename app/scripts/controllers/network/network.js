@@ -111,19 +111,19 @@ export default class NetworkController extends EventEmitter {
     this.on(NETWORK_EVENTS.NETWORK_DID_CHANGE, this.lookupNetwork);
   }
 
-  /**
-   * Sets the Infura project ID
-   *
-   * @param {string} projectId - The Infura project ID
-   * @throws {Error} If the project ID is not a valid string.
-   */
-  setInfuraProjectId(projectId) {
-    if (!projectId || typeof projectId !== 'string') {
-      throw new Error('Invalid Infura project ID');
-    }
+  // /**
+  //  * Sets the Infura project ID
+  //  *
+  //  * @param {string} projectId - The Infura project ID
+  //  * @throws {Error} If the project ID is not a valid string.
+  //  */
+  // setInfuraProjectId(projectId) {
+  //   if (!projectId || typeof projectId !== 'string') {
+  //     throw new Error('Invalid Infura project ID');
+  //   }
 
-    this._infuraProjectId = projectId;
-  }
+  //   this._infuraProjectId = projectId;
+  // }
 
   initializeProvider(providerParams) {
     this._baseProviderParams = providerParams;
@@ -242,13 +242,14 @@ export default class NetworkController extends EventEmitter {
     const ethQuery = new EthQuery(this._provider);
     const initialNetwork = this.getNetworkState();
     const { type } = this.getProviderConfig();
-    const isInfura = INFURA_PROVIDER_TYPES.includes(type);
-
-    if (isInfura) {
-      this._checkInfuraAvailability(type);
-    } else {
-      this.emit(NETWORK_EVENTS.INFURA_IS_UNBLOCKED);
-    }
+    // const isInfura = INFURA_PROVIDER_TYPES.includes(type);
+    INFURA_PROVIDER_TYPES.includes(type);
+    // if (isInfura) {
+    //   this._checkInfuraAvailability(type);
+    // } else {
+    //   this.emit(NETWORK_EVENTS.INFURA_IS_UNBLOCKED);
+    // }
+    this.emit(NETWORK_EVENTS.INFURA_IS_UNBLOCKED);
 
     ethQuery.sendAsync({ method: 'net_version' }, (err, networkVersion) => {
       const currentNetwork = this.getNetworkState();
@@ -352,7 +353,6 @@ export default class NetworkController extends EventEmitter {
 
   async _checkInfuraAvailability(network) {
     const rpcUrl = `https://${network}.infura.io/v3/${this._infuraProjectId}`;
-
     let networkChanged = false;
     this.once(NETWORK_EVENTS.NETWORK_DID_CHANGE, () => {
       networkChanged = true;
@@ -403,18 +403,21 @@ export default class NetworkController extends EventEmitter {
   }
 
   _configureProvider({ type, rpcUrl, chainId }) {
+    INFURA_PROVIDER_TYPES.includes(type);
+    this._configureStandardProvider(rpcUrl, chainId);
+
     // infura type-based endpoints
-    const isInfura = INFURA_PROVIDER_TYPES.includes(type);
-    if (isInfura) {
-      this._configureInfuraProvider(type, this._infuraProjectId);
-      // url-based rpc endpoints
-    } else if (type === NETWORK_TYPE_RPC) {
-      this._configureStandardProvider(rpcUrl, chainId);
-    } else {
-      throw new Error(
-        `NetworkController - _configureProvider - unknown type "${type}"`,
-      );
-    }
+    // const isInfura = INFURA_PROVIDER_TYPES.includes(type);
+    // if (isInfura) {
+    //   this._configureInfuraProvider(type, this._infuraProjectId);
+    //   // url-based rpc endpoints
+    // } else if (type === NETWORK_TYPE_RPC) {
+    //   this._configureStandardProvider(rpcUrl, chainId);
+    // } else {
+    //   throw new Error(
+    //     `NetworkController - _configureProvider - unknown type "${type}"`,
+    //   );
+    // }
   }
 
   _configureInfuraProvider(type, projectId) {

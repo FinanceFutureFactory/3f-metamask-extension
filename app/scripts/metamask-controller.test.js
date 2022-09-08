@@ -170,7 +170,6 @@ describe('MetaMaskController', function () {
         getVersion: () => 'foo',
       },
       browser: browserPolyfillMock,
-      infuraProjectId: 'foo',
     });
 
     // add sinon method spies

@@ -70,7 +70,8 @@ function defineAndRunBuildTasks() {
     version,
   } = parseArgv();
 
-  const browserPlatforms = ['firefox', 'chrome', 'brave', 'opera'];
+  // const browserPlatforms = ['firefox', 'chrome', 'brave', 'opera'];
+  const browserPlatforms = ['chrome'];
 
   const browserVersionMap = getBrowserVersionMap(browserPlatforms, version);
 

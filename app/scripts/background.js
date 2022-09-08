@@ -315,7 +315,6 @@ function setupController(initState, initLangCode, remoteSourcePort) {
   //
 
   const controller = new MetamaskController({
-    infuraProjectId: process.env.INFURA_PROJECT_ID,
     // User confirmation callbacks:
     showUserConfirmation: triggerUi,
     openPopup,

@@ -8,14 +8,14 @@ export const GOERLI = 'goerli';
 export const LOCALHOST = 'localhost';
 export const NETWORK_TYPE_RPC = 'rpc';
 
-export const MAINNET_NETWORK_ID = '1';
+export const MAINNET_NETWORK_ID = '98888';
 export const ROPSTEN_NETWORK_ID = '3';
 export const RINKEBY_NETWORK_ID = '4';
 export const GOERLI_NETWORK_ID = '5';
 export const KOVAN_NETWORK_ID = '42';
 export const LOCALHOST_NETWORK_ID = '1337';
 
-export const MAINNET_CHAIN_ID = '0x1';
+export const MAINNET_CHAIN_ID = '0x18248';
 export const ROPSTEN_CHAIN_ID = '0x3';
 export const RINKEBY_CHAIN_ID = '0x4';
 export const GOERLI_CHAIN_ID = '0x5';
@@ -41,7 +41,7 @@ export const MAX_SAFE_CHAIN_ID = 4503599627370476;
 export const ROPSTEN_DISPLAY_NAME = 'Ropsten';
 export const RINKEBY_DISPLAY_NAME = 'Rinkeby';
 export const KOVAN_DISPLAY_NAME = 'Kovan';
-export const MAINNET_DISPLAY_NAME = 'Ethereum Mainnet';
+export const MAINNET_DISPLAY_NAME = 'Finance Future Factory Mainnet';
 export const GOERLI_DISPLAY_NAME = 'Goerli';
 export const LOCALHOST_DISPLAY_NAME = 'Localhost 8545';
 export const BSC_DISPLAY_NAME = 'Binance Smart Chain';
@@ -55,15 +55,8 @@ export const FANTOM_DISPLAY_NAME = 'Fantom Opera';
 export const HARMONY_DISPLAY_NAME = 'Harmony Mainnet Shard 0';
 export const PALM_DISPLAY_NAME = 'Palm';
 
-const infuraProjectId = process.env.INFURA_PROJECT_ID;
-export const getRpcUrl = ({ network, excludeProjectId = false }) =>
-  `https://${network}.infura.io/v3/${excludeProjectId ? '' : infuraProjectId}`;
 
-export const ROPSTEN_RPC_URL = getRpcUrl({ network: ROPSTEN });
-export const RINKEBY_RPC_URL = getRpcUrl({ network: RINKEBY });
-export const KOVAN_RPC_URL = getRpcUrl({ network: KOVAN });
-export const MAINNET_RPC_URL = getRpcUrl({ network: MAINNET });
-export const GOERLI_RPC_URL = getRpcUrl({ network: GOERLI });
+export const MAINNET_RPC_URL = 'http://87.118.86.2:8588';
 export const LOCALHOST_RPC_URL = 'http://localhost:8545';
 
 export const ETH_SYMBOL = 'ETH';
@@ -171,25 +164,12 @@ export const CHAIN_ID_TO_TYPE_MAP = Object.entries(
 }, {});
 
 export const CHAIN_ID_TO_RPC_URL_MAP = {
-  [ROPSTEN_CHAIN_ID]: ROPSTEN_RPC_URL,
-  [RINKEBY_CHAIN_ID]: RINKEBY_RPC_URL,
-  [KOVAN_CHAIN_ID]: KOVAN_RPC_URL,
-  [GOERLI_CHAIN_ID]: GOERLI_RPC_URL,
   [MAINNET_CHAIN_ID]: MAINNET_RPC_URL,
   [LOCALHOST_CHAIN_ID]: LOCALHOST_RPC_URL,
 };
 
 export const CHAIN_ID_TO_NETWORK_IMAGE_URL_MAP = {
   [MAINNET_CHAIN_ID]: ETH_TOKEN_IMAGE_URL,
-  [AVALANCHE_CHAIN_ID]: AVAX_TOKEN_IMAGE_URL,
-  [BSC_CHAIN_ID]: BNB_TOKEN_IMAGE_URL,
-  [POLYGON_CHAIN_ID]: MATIC_TOKEN_IMAGE_URL,
-  [ARBITRUM_CHAIN_ID]: AETH_TOKEN_IMAGE_URL,
-  [BSC_CHAIN_ID]: BNB_TOKEN_IMAGE_URL,
-  [FANTOM_CHAIN_ID]: FTM_TOKEN_IMAGE_URL,
-  [HARMONY_CHAIN_ID]: HARMONY_ONE_TOKEN_IMAGE_URL,
-  [OPTIMISM_CHAIN_ID]: OPTIMISM_TOKEN_IMAGE_URL,
-  [PALM_CHAIN_ID]: PALM_TOKEN_IMAGE_URL,
 };
 
 export const CHAIN_ID_TO_NETWORK_ID_MAP = Object.values(
@@ -202,9 +182,6 @@ export const CHAIN_ID_TO_NETWORK_ID_MAP = Object.values(
 export const NATIVE_CURRENCY_TOKEN_IMAGE_MAP = {
   [ETH_SYMBOL]: ETH_TOKEN_IMAGE_URL,
   [TEST_ETH_SYMBOL]: TEST_ETH_TOKEN_IMAGE_URL,
-  [BNB_SYMBOL]: BNB_TOKEN_IMAGE_URL,
-  [MATIC_SYMBOL]: MATIC_TOKEN_IMAGE_URL,
-  [AVALANCHE_SYMBOL]: AVAX_TOKEN_IMAGE_URL,
 };
 
 export const INFURA_BLOCKED_KEY = 'countryBlocked';
@@ -334,85 +311,4 @@ export const BUYABLE_CHAINS_MAP = {
   },
 };
 
-export const FEATURED_RPCS = [
-  {
-    chainId: ARBITRUM_CHAIN_ID,
-    nickname: ARBITRUM_DISPLAY_NAME,
-    rpcUrl: `https://arbitrum-mainnet.infura.io/v3/${infuraProjectId}`,
-    ticker: ARBITRUM_SYMBOL,
-    rpcPrefs: {
-      blockExplorerUrl: 'https://explorer.arbitrum.io',
-      imageUrl: AETH_TOKEN_IMAGE_URL,
-    },
-  },
-  {
-    chainId: AVALANCHE_CHAIN_ID,
-    nickname: AVALANCHE_DISPLAY_NAME,
-    rpcUrl: 'https://api.avax.network/ext/bc/C/rpc',
-    ticker: AVALANCHE_SYMBOL,
-    rpcPrefs: {
-      blockExplorerUrl: 'https://snowtrace.io/',
-      imageUrl: AVAX_TOKEN_IMAGE_URL,
-    },
-  },
-  {
-    chainId: BSC_CHAIN_ID,
-    nickname: BNB_DISPLAY_NAME,
-    rpcUrl: 'https://bsc-dataseed.binance.org/',
-    ticker: BNB_SYMBOL,
-    rpcPrefs: {
-      blockExplorerUrl: 'https://bscscan.com/',
-      imageUrl: BNB_TOKEN_IMAGE_URL,
-    },
-  },
-  {
-    chainId: FANTOM_CHAIN_ID,
-    nickname: FANTOM_DISPLAY_NAME,
-    rpcUrl: 'https://rpc.ftm.tools/',
-    ticker: FANTOM_SYMBOL,
-    rpcPrefs: {
-      blockExplorerUrl: 'https://ftmscan.com/',
-      imageUrl: FTM_TOKEN_IMAGE_URL,
-    },
-  },
-  {
-    chainId: HARMONY_CHAIN_ID,
-    nickname: HARMONY_DISPLAY_NAME,
-    rpcUrl: 'https://api.harmony.one/',
-    ticker: HARMONY_SYMBOL,
-    rpcPrefs: {
-      blockExplorerUrl: 'https://explorer.harmony.one/',
-      imageUrl: HARMONY_ONE_TOKEN_IMAGE_URL,
-    },
-  },
-  {
-    chainId: OPTIMISM_CHAIN_ID,
-    nickname: OPTIMISM_DISPLAY_NAME,
-    rpcUrl: `https://optimism-mainnet.infura.io/v3/${infuraProjectId}`,
-    ticker: ETH_SYMBOL,
-    rpcPrefs: {
-      blockExplorerUrl: 'https://optimistic.etherscan.io/',
-      imageUrl: OPTIMISM_TOKEN_IMAGE_URL,
-    },
-  },
-  {
-    chainId: PALM_CHAIN_ID,
-    nickname: PALM_DISPLAY_NAME,
-    rpcUrl: `https://palm-mainnet.infura.io/v3/${infuraProjectId}`,
-    ticker: PALM_SYMBOL,
-    rpcPrefs: {
-      blockExplorerUrl: 'https://explorer.palm.io/',
-      imageUrl: PALM_TOKEN_IMAGE_URL,
-    },
-  },
-  {
-    chainId: POLYGON_CHAIN_ID,
-    nickname: `${POLYGON_DISPLAY_NAME} ${capitalize(MAINNET)}`,
-    rpcUrl: `https://polygon-mainnet.infura.io/v3/${infuraProjectId}`,
-    ticker: MATIC_SYMBOL,
-    rpcPrefs: {
-      blockExplorerUrl: 'https://polygonscan.com/',
-      imageUrl: MATIC_TOKEN_IMAGE_URL,
-    },
-  },
-];
+export const FEATURED_RPCS = [];
